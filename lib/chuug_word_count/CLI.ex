@@ -22,13 +22,13 @@ defmodule ChuugWordCount.CLI do
   end
 
   def process({:text, url}) do
-    IO.puts "Fetching #{url}"
+    IO.puts "~~~~~ Fetching #{url}"
     ChuugWordCount.UrlHelper.fetch(url)
       |> process_response
   end
 
   def process_response({:ok, body}) do
-    IO.puts body
+    urls = String.split(body, "\n", trim: true)
   end
 
   def process_response({:error, msg}) do
