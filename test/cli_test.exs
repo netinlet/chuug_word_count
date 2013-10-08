@@ -7,4 +7,8 @@ defmodule CliTest do
     assert parse_args(["-h", "anything"]) == :help
     assert parse_args(["--help", "anything"]) == :help
   end
+
+  test "--text <url> returns correct value" do
+    assert parse_args(["--text", "http://google.com"]) == {:text, "http://google.com"}
+  end
 end
