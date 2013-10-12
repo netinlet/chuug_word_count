@@ -12,7 +12,8 @@ defmodule CliTest do
     assert parse_args(["--text", "http://google.com"]) == {:text, "http://google.com"}
   end
 
-  test "process_response splits the response into an array of urls" do
-    assert process_response({:ok, "http://google.com\nhttp://yahoo.com\n"}) == ["http://google.com", "http://yahoo.com"]
-  end
+  #test "process_response splits the response into an array of urls" do
+    #assert process_response({:ok, "http://google.com\nhttp://yahoo.com\n"}) == ["http://google.com", "http://yahoo.com"]
+  #end
+
 end

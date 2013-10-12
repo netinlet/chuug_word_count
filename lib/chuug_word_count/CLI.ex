@@ -28,7 +28,8 @@ defmodule ChuugWordCount.CLI do
   end
 
   def process_response({:ok, body}) do
-    urls = String.split(body, "\n", trim: true)
+    String.split(body, "\n", trim: true)
+      |> ChuugWordCount.WordCounter.tally
   end
 
   def process_response({:error, msg}) do
