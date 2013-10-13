@@ -84,7 +84,7 @@ defmodule ChuugWordCount.CLI do
     IO.puts "========================================"
     IO.puts "CHUUG Elixir Top 10 most frequent words"
     Enum.take(list, count)
-      |> Enum.each(fn({word, word_count}) when is_binary(word) ->
+      |> Enum.each(fn({word, word_count}) when is_binary(word) -> # without the with_binary check, this errors due to elixir bug - sometimes residual process laying around from compilation
            IO.puts "#{word} : #{word_count}"
          end)
 
