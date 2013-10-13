@@ -56,6 +56,7 @@ defmodule ChuugWordCount.CLI do
   end
 
   def print("summary", sorted_wc) do
+    print("total_unique", sorted_wc)
     print("total_wc", sorted_wc)
     print("top", 10, sorted_wc)
     print("bottom", 10, sorted_wc)
@@ -67,16 +68,25 @@ defmodule ChuugWordCount.CLI do
     Enum.each(list, fn({word, word_count}) -> IO.puts "#{word} : #{word_count}" end)
   end
 
+  def print("total_unique", sorted_wc) do
+    IO.puts "========================================"
+    total = Enum.reduce(sorted_wc, 0, fn({_, word_frequency}, acc) ->  acc + word_frequency end)
+
+    IO.puts "Found #{total} TOTAL words\n"
+  end
+
   def print("total_wc", sorted_wc) do
     IO.puts "========================================"
-    IO.puts "Found #{Enum.count(sorted_wc)} words\n"
+    IO.puts "Found #{Enum.count(sorted_wc)} UNIQUE words\n"
   end
 
   def print("top", count, list) do
     IO.puts "========================================"
     IO.puts "CHUUG Elixir Top 10 most frequent words"
     Enum.take(list, count)
-      |> Enum.each(fn({word, word_count}) -> IO.puts "#{word} : #{word_count}" end)
+      |> Enum.each(fn({word, word_count}) when is_binary(word) ->
+           IO.puts "#{word} : #{word_count}"
+         end)
 
    IO.puts "\n"
   end

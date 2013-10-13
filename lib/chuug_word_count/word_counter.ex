@@ -27,7 +27,7 @@ defmodule ChuugWordCount.WordCounter do
   end
 
   defp to_words(doc) do
-    List.flatten Regex.scan(%r{\w+}, doc)
+    String.split(doc) |> Enum.map(fn(word) -> Regex.replace(%r/\W$/, word, "") end)
   end
 
   defp summarize(words) do
