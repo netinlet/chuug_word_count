@@ -1,7 +1,6 @@
 defmodule ChuugWordCount.WordCounter do
 
   def tally(urls) do
-    IO.puts "Tallying..."
     fetch_all(urls)
       |> count
       |> print_summary
@@ -9,7 +8,6 @@ defmodule ChuugWordCount.WordCounter do
 
   def fetch_all(urls) do
     pmap(urls, fn(url) ->
-      IO.puts "Fetching #{url}"
       {_, body} = ChuugWordCount.UrlHelper.fetch(url)
       body
     end)
@@ -24,10 +22,12 @@ defmodule ChuugWordCount.WordCounter do
     print(:bottom, 10, sorted_wc)
   end
 
- def count(docs) do
-   IO.puts "Counting..."
+ def count(doc) when is_binary(doc) do
+   count([doc])
+ end
+
+ def count(docs) when is_list(docs) do
     pmap(docs, fn(doc) ->
-      IO.puts "Mapping Doc..."
       doc
         |> String.downcase
         |> to_words
@@ -62,7 +62,6 @@ defmodule ChuugWordCount.WordCounter do
   defp to_words(sentence), do: List.flatten Regex.scan(%r{\w+}, sentence)
 
   defp summarize(words) do
-    IO.puts "Summarizing..."
     Enum.reduce words, HashDict.new, add_count(&1, &2)
   end
 

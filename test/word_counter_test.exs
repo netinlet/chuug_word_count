@@ -20,6 +20,10 @@ defmodule WordCountTest do
     assert ChuugWordCount.WordCounter.count(["three one two three two three"]) == HashDict.new([{"one", 1}, {"two", 2}, {"three", 3}])
   end
 
+  test "handles string input" do
+    assert ChuugWordCount.WordCounter.count("one two three") == HashDict.new([{"one", 1}, {"two", 1}, {"three", 1}])
+  end
+
   test "multi line documents" do
     input = """
     one
@@ -38,12 +42,12 @@ defmodule WordCountTest do
                                                                     {"six", 6}, {"seven", 7}, {"eight", 8}, {"nine", 9}, {"ten", 10}])
   end
 
-  #test "handling punctuation" do
-    #assert ChuugWordCount.WordCounter.count("I didn't get a harrumph out of that guy!") == HashDict.new( [{"i", 1}, {"didn't", 1}, {"get", 1},
-                                                                                                         #{"a", 1}, {"harrumph", 1}, {"out", 1},
-                                                                                                         #{"of", 1}, {"that", 1}, {"guy", 1}])
-  #end
+  test "handling punctuation" do
+    assert ChuugWordCount.WordCounter.count("I didn't get a harrumph out of that guy!") == HashDict.new( [{"i", 1}, {"didn't", 1}, {"get", 1},
+                                                                                                         {"a", 1}, {"harrumph", 1}, {"out", 1},
+                                                                                                         {"of", 1}, {"that", 1}, {"guy", 1}])
+  end
 
 
-
+  
 end
