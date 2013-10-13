@@ -3,11 +3,6 @@ defmodule WordCountTest do
 
   import ChuugWordCount.WordCounter
 
-  # Temporary
-  #test "printing the content of the url" do
-    #ChuugWordCount.WordCounter.tally(["http://www.gutenberg.org/cache/epub/11/pg11.txt"])
-  #end
-
   test "count one word" do
     assert ChuugWordCount.WordCounter.count(["foo"]) == HashDict.new([{"foo", 1}])
   end
@@ -49,5 +44,4 @@ defmodule WordCountTest do
   end
 
 
-  
 end

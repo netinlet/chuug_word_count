@@ -32,6 +32,12 @@ defmodule ChuugWordCount.WordCounter do
 
   defp summarize(words) do
     Enum.reduce words, HashDict.new, add_count(&1, &2)
+
+    # &n is a shortcut to parameters of the function
+    # could be written as
+    #Enum.reduce(words, HashDict.new, fn(word,acc) ->
+      #add_count(word, acc)
+    #end)
   end
 
   defp add_count(word, counts) do

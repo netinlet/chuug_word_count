@@ -9,10 +9,10 @@ defmodule ChuugWordCount.CLI do
     opts = OptionParser.parse(argv, switches: [ help: :boolean],
                                     aliases:  [ h:  :help])
     case opts do
-      { [ help: true ], _, _ }    -> :help
+      { [ help: true ], _, _ }                     -> :help
       { [ report: report_type, seed: url], _, _ }  -> {:report, report_type, :seed, url}
-      { [ seed: url], _, _ }    -> {:seed, url}
-      _                        -> :help
+      { [ seed: url], _, _ }                       -> {:seed, url}
+      _                                            -> :help
     end
   end
 
