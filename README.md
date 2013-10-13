@@ -30,7 +30,11 @@ Make command line executable
 mix compile
 mix escriptize
 ```
+
+Run it
+```
 ./chuug_word_count --report summary --seed http://netinlet.com/assets/word_count_urls.txt
+```
 
 
 
