@@ -3,7 +3,6 @@ defmodule ChuugWordCount.WordCounter do
   def tally(urls) do
     fetch_all(urls)
       |> count
-      |> print_summary
   end
 
   def fetch_all(urls) do
@@ -11,15 +10,6 @@ defmodule ChuugWordCount.WordCounter do
       {_, body} = ChuugWordCount.UrlHelper.fetch(url)
       body
     end)
-  end
-
-  def print_summary(word_count_dict) do
-    sorted_wc = Enum.sort(word_count_dict, fn({a,av},{b,bv}) ->
-      av > bv
-    end)
-    print(:summary, sorted_wc)
-    print(:top, 10, sorted_wc)
-    print(:bottom, 10, sorted_wc)
   end
 
  def count(doc) when is_binary(doc) do
@@ -36,30 +26,9 @@ defmodule ChuugWordCount.WordCounter do
       |> summarize
   end
 
-  def print(:summary, list) do
-    IO.puts "========================================"
-    IO.puts "Found #{Enum.count(list)} words\n"
+  defp to_words(doc) do
+    List.flatten Regex.scan(%r{\w+}, doc)
   end
-
-  def print(:top, count, list) do
-    IO.puts "========================================"
-    IO.puts "CHUUG Elixir Top 10 most frequent words"
-    Enum.take(list, count)
-      |> Enum.each(fn({word, word_count}) -> IO.puts "#{word} : #{word_count}" end)
-
-   IO.puts "\n"
-  end
-
-  def print(:bottom, count, list) do
-    IO.puts "========================================"
-    IO.puts "CHUUG Elixir Top 10 least frequent words"
-    Enum.slice(list, Enum.count(list) - count, Enum.count(list) - 1)
-      |> Enum.each(fn({word, word_count}) -> IO.puts "#{word} : #{word_count}" end)
-
-    IO.puts "\n"
-  end
-
-  defp to_words(sentence), do: List.flatten Regex.scan(%r{\w+}, sentence)
 
   defp summarize(words) do
     Enum.reduce words, HashDict.new, add_count(&1, &2)

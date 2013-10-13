@@ -8,12 +8,12 @@ defmodule CliTest do
     assert parse_args(["--help", "anything"]) == :help
   end
 
-  test "--text <url> returns correct value" do
-    assert parse_args(["--text", "http://google.com"]) == {:text, "http://google.com"}
+  test "--seed <url> returns correct value" do
+    assert parse_args(["--seed", "http://google.com"]) == {:seed, "http://google.com"}
   end
 
-  #test "process_response splits the response into an array of urls" do
-    #assert process_response({:ok, "http://google.com\nhttp://yahoo.com\n"}) == ["http://google.com", "http://yahoo.com"]
-  #end
+  test "seed and report type" do
+    assert parse_args(["--report", "full", "--seed", "http://google.com" ]) == {:report, "full", :seed, "http://google.com"}
+  end
 
 end
