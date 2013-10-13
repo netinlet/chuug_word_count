@@ -12,5 +12,21 @@ Thus far, the requirements are
  5. Perform a word count on all 50 documents.
  6. Present a combined wordcount.
 
-Requirements are not finalized.
+## Setup
+
+Excellent Setup instructions here: http://elixir-lang.org/getting_started/1.html
+
+## Running
+
+git clone https://github.com/netinlet/chuug_word_count.git
+cd chuug_word_count
+mix deps.get
+mix test
+
+Make command line executable
+
+mix compile
+mix escriptize
+
+
 

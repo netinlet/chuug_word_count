@@ -6,4 +6,9 @@ defmodule ChuugWordCount do
   def start(_type, _args) do
     ChuugWordCount.Supervisor.start_link
   end
+
+  def main(args) do
+    ChuugWordCount.CLI.run(args)
+  end
+
 end
