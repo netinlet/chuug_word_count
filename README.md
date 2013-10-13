@@ -18,16 +18,18 @@ Excellent Setup instructions here: http://elixir-lang.org/getting_started/1.html
 
 ## Running
 
+```
 git clone https://github.com/netinlet/chuug_word_count.git
 cd chuug_word_count
 mix deps.get
 mix test
+```
 
 Make command line executable
-
+```
 mix compile
 mix escriptize
-
+```
 ./chuug_word_count --report summary --seed http://netinlet.com/assets/word_count_urls.txt
 
 
