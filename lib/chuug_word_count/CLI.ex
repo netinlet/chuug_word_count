@@ -41,7 +41,7 @@ defmodule ChuugWordCount.CLI do
   end
 
   defp extract_seed_urls({:error, msg}) do
-    IO.puts "Error retrieving seed data"
+    IO.puts "Error retrieving seed data: #{msg}"
     System.halt(2)
   end
 
