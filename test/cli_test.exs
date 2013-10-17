@@ -9,11 +9,11 @@ defmodule CliTest do
   end
 
   test "--seed <url> returns correct value" do
-    assert parse_args(["--seed", "http://google.com"]) == {:seed, "http://google.com"}
+    assert parse_args(["--seed", "/path/to/file"]) == {:seed, "/path/to/file"}
   end
 
   test "seed and report type" do
-    assert parse_args(["--report", "full", "--seed", "http://google.com" ]) == {:report, "full", :seed, "http://google.com"}
+    assert parse_args(["--report", "full", "--seed", "/path/to/file" ]) == {:report, "full", :seed, "/path/to/file"}
   end
 
 end

@@ -19,7 +19,6 @@ defmodule ChuugWordCount.WordCounter do
  def count(docs) when is_list(docs) do
     pmap(docs, fn(doc) ->
       doc
-        |> String.downcase
         |> to_words
     end)
       |> List.flatten
@@ -32,7 +31,7 @@ defmodule ChuugWordCount.WordCounter do
 
   defp summarize(words) do
     Enum.reduce(words, HashDict.new, fn(word,acc) ->
-      add_count(word, acc)
+      add_count(String.downcase(word), acc)
     end)
   end
 

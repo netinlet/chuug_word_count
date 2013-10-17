@@ -9,10 +9,10 @@ defmodule ChuugWordCount.CLI do
     opts = OptionParser.parse(argv, switches: [ help: :boolean],
                                     aliases:  [ h:  :help])
     case opts do
-      { [ help: true ], _, _ }                     -> :help
-      { [ report: report_type, seed: url], _, _ }  -> {:report, report_type, :seed, url}
-      { [ seed: url], _, _ }                       -> {:seed, url}
-      _                                            -> :help
+      { [ help: true ], _, _ }                      -> :help
+      { [ report: report_type, seed: path], _, _ }  -> {:report, report_type, :seed, path}
+      { [ seed: path], _, _ }                       -> {:seed, path}
+      _                                             -> :help
     end
   end
 
@@ -22,19 +22,23 @@ defmodule ChuugWordCount.CLI do
     """
   end
 
-  def process({:seed, url}) do
-    process({:report, "summary", :seed, url})
+  def process({:seed, path}) do
+    process({:report, "summary", :seed, path})
   end
 
-  def process({:report, report_type, :seed, url}) do
-    IO.puts "~~~~~ Fetching #{url}"
-    word_counts = ChuugWordCount.UrlHelper.fetch(url)
+  def process({:report, report_type, :seed, path}) do
+    word_counts = read_seed(path)
       |> extract_seed_urls
       |> word_count_docs
       |> sort_results
 
     print(report_type, word_counts)
   end
+
+  def read_seed(path) do
+    File.read(path)
+  end
+
 
   defp extract_seed_urls({:ok, body}) do
     String.split(body, "\n", trim: true)

@@ -1,8 +1,6 @@
 defmodule WordCountTest do
   use ExUnit.Case
 
-  import ChuugWordCount.WordCounter
-
   test "count one word" do
     assert ChuugWordCount.WordCounter.count(["foo"]) == HashDict.new([{"foo", 1}])
   end
