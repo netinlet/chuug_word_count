@@ -5,12 +5,11 @@ The subject of October CHUUG meeting https://plus.google.com/communities/1092914
 
 Thus far, the requirements are
 
- 1. Everyone is coded and deployed to a common platform before the ev ent.
- 2. You are given a flat file of 50 URLS.
- 3. The flat file must be consumed and you must download all 50 URLS.
- 4. Strip the content of each URL of HTML.
- 5. Perform a word count on all 50 documents.
- 6. Present a combined wordcount.
+ 1. Your program should take a path to a file as  command line argument. 
+ 2. The path will be a flat file of URLs separated by carriage return. 
+ 3. The URLs will point to a page of text. 
+ 4. Your program should output a text file containing the aggregate word counts for all the URLs contained in the flat file. 
+ 5. Additionally, your program should also display the time it took from initial invocation to the completion of writing the output file.
 
 ## Setup
 
@@ -33,7 +32,7 @@ mix escriptize
 
 Run it
 ```
-./chuug_word_count --report summary --seed http://netinlet.com/assets/word_count_urls.txt
+./chuug_word_count --report full --seed /path/to/seed/file
 ```
 
 
